@@ -73,6 +73,7 @@ def train():
         best_params = None
         total_episodes = 0
 
+    print(cpu_count())
     with Pool(processes=cpu_count()) as pool:
         while best_average < 310:
             # Generate samples
