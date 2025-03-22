@@ -55,7 +55,7 @@ def train():
     # n_samples = 200
     # n_elite = 40
     # noise_scale = 0.1
-    n_samples = 100
+    n_samples = 500
     n_elite = 100    
     noise_scale = 0.05
 
@@ -82,7 +82,7 @@ def train():
             avg_rewards = np.array(pool.map(evaluate, samples))
             current_best = np.max(avg_rewards)
             current_avg = np.mean(avg_rewards)
-            total_episodes += n_samples * 100
+            total_episodes += n_samples * 1000
 
             # Update elite distribution
             elite_indices = np.argsort(avg_rewards)[-n_elite:]
