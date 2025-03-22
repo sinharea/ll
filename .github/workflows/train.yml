@@ -1,0 +1,40 @@
+name: Train Lunar Lander Agent
+
+on:
+  workflow_dispatch:
+
+jobs:
+  train-agent:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y swig
+
+      - name: Install Python dependencies
+        run: |
+          pip install --no-cache-dir "gymnasium[box2d]" numpy
+
+      - name: Train the agent
+        run: |
+          python train.py || { echo "Training failed!"; exit 1; }
+
+      - name: Upload trained policy
+        uses: actions/upload-artifact@v4
+        with:
+          name: trained-policy
+          path: "best_policy.npy"
+          if-no-files-found: error
