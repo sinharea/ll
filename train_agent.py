@@ -82,7 +82,7 @@ def train():
             avg_rewards = np.array(pool.map(evaluate, samples))
             current_best = np.max(avg_rewards)
             current_avg = np.mean(avg_rewards)
-            total_episodes += n_samples * 1000
+            total_episodes += n_samples * 100
 
             # Update elite distribution
             elite_indices = np.argsort(avg_rewards)[-n_elite:]
