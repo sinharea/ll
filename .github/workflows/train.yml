@@ -30,7 +30,7 @@ jobs:
 
       - name: Train the agent
         run: |
-          python train.py || { echo "Training failed!"; exit 1; }
+          python train.py --train || { echo "Training failed!"; exit 1; }
 
       - name: Upload trained policy
         uses: actions/upload-artifact@v4
